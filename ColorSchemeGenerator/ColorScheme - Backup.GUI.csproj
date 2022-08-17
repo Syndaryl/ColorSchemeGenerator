@@ -1,0 +1,58 @@
+﻿
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>	<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <StartupObject>ColorScheme.GUI.App</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Page1.xaml.xaml">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Page1.xaml.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ColorHelper" Version="1.8.0" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DataModel.ColorGenerators.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataModel.ColorGenerators.cs</LastGenOutput>
+    </None>
+    <None Update="Page1.xaml.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Page1.xaml.xaml</LastGenOutput>
+    </None>
+    <None Update="TextTemplate1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTemplate1.txt</LastGenOutput>
+    </None>
+    <None Update="TextTemplate1.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TextTemplate1.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DataModel.ColorGenerators.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataModel.ColorGenerators.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,6 @@
+<#@ include file="DependencyObjectTemplate.tt" #>
+<#
+	var location = this.Host.ResolvePath(@"RangeControl.xml");
+    GenerateClass("SilverlightTemplates.RangeControl",
+        location);
+#>

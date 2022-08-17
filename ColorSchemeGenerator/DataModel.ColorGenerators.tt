@@ -1,0 +1,61 @@
+﻿<#@ output extension=".cs" #>
+<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Xml.dll" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+var location = this.Host.ResolvePath("T4Config.xml");
+System.Xml.XmlDocument configurationData = new System.Xml.XmlDocument();
+using (var stream = System.IO.File.OpenRead(location))
+{
+    configurationData.Load( stream ); // Read a data file here.
+}
+#>
+namespace ColorScheme.GUI;
+using KnownColor = System.Drawing.KnownColor;
+using Color = System.Windows.Media.Color;
+using SolidColorBrush = System.Windows.Media.SolidColorBrush;
+
+public partial class DataModel
+{
+<#
+if (configurationData.DocumentElement != null)
+{
+    var shadeNode = configurationData.DocumentElement.SelectSingleNode("/config/@shade");
+    var nodes = configurationData.DocumentElement.SelectNodes("/config/datamodel/color");
+
+    int colorCount = nodes.Count;
+
+    for (var x = 1; x <= colorCount; x++){
+    #>
+    public Color Color<#= x.ToString("00") #>
+    {
+        get => Brush<#= x.ToString("00") #>.Color;
+        set => Brush<#= x.ToString("00") #>.Color = value;
+    }
+    
+<# } for (var x = 1; x <= colorCount; x++){
+#>
+    public SolidColorBrush Brush<#= x.ToString("00") #> { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+<# } #>
+
+    public void Update()
+    {
+        _scheme.PrimaryColor.R = _primary.R;
+        _scheme.PrimaryColor.G = _primary.G;
+        _scheme.PrimaryColor.B = _primary.B;
+
+<# 
+        for (var x = 0; x < colorCount; x++)
+        {
+            var degree = nodes[x].SelectNodes("@degree")[0]?.Value ?? "15";
+#>
+            Color<#= (x+1).ToString("00") #> = _scheme.Harmonize(ColorHarmony.<#= nodes[x].InnerText #>, <#= degree #>, <#= shadeNode.Value #>);
+<# } #>
+    }
+<#}#>
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+    targetNamespace="http://www.scottlogic.co.uk/DependencyObject"
+    elementFormDefault="qualified"
+    xmlns="http://www.scottlogic.co.uk/DependencyObject"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="dependencyObjects" type="dependencyObjectsType"/>
+
+  <xs:complexType name="dependencyObjectsType">
+    <xs:sequence>
+      <xs:element name="dependencyObject" 
+        type="dependencyObjectType"  
+        maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dependencyObjectType">
+    <xs:sequence>
+      <xs:element name="dependencyProperty" 
+        type="dependencyPropertyType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" 
+      type="xs:string" use="required"/>
+    <xs:attribute name="notifyPropertyChanged" 
+      type="xs:boolean" use="optional"/>
+    <xs:attribute name="base" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="dependencyPropertyType">
+    <xs:attribute name="summary" type="xs:string" use="optional"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="typeConverter" type="xs:string" use="optional"/>
+    <xs:attribute name="defaultValue" type="xs:string" use="required"/>
+    <xs:attribute name="propertyChangedCallback" type="xs:boolean" use="optional"/>
+    <xs:attribute name="notifyPropertyChanged" type="xs:boolean" use="optional"/>
+    <xs:attribute name="attached" type="xs:boolean" use="optional"/>
+    <xs:attribute name="metadata" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+
+</xs:schema>

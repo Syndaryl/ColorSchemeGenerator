@@ -1,0 +1,77 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".xaml" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Xml.dll" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Windows.Media" #>
+<Page x:Class="ColorScheme.GUI.ColorSwatches"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ColorScheme.GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="128" d:DesignWidth="256"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    Loaded="OnLoad"
+      Title="Color Swatches">
+    <d:Page.DataContext>
+        <local:DataModel>
+        </local:DataModel>
+    </d:Page.DataContext>
+    <Page.Resources>
+        <RectangleGeometry x:Key="Lozenge" RadiusX="8" RadiusY="8" Rect="0,0, 64, 16"/>
+        <Style x:Key="ColorSwatch" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2 0" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <EventSetter Event="Click" Handler="Swatch_OnClick" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2 0" />
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+    <WrapPanel x:Name="Colors">
+        <WrapPanel.Resources>
+        </WrapPanel.Resources>
+<#
+var location = this.Host.ResolvePath("T4Config.xml");
+System.Xml.XmlDocument configurationData = new System.Xml.XmlDocument();
+using (var stream = System.IO.File.OpenRead(location))
+{
+    configurationData.Load( stream ); // Read a data file here.
+    var nodes = configurationData.DocumentElement.SelectNodes("/config/datamodel");
+    
+    int x = 0;
+    foreach (XmlNode node in nodes)
+    {
+        var subnodes = node.SelectNodes("color");
+        var name = node.SelectNodes("@name")[0].Value;
+        int colorCount = subnodes.Count;
+#>
+        <StackPanel Name="<#= name #>">
+            <TextBlock Style="{StaticResource Label}"><#= name #></TextBlock>
+<#
+        foreach (var subnode in subnodes)
+        {
+            x++;
+    #>
+            <Button Name="Button<#= name #><#= x.ToString("00") #>"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush<#= x.ToString("00") #>}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+<#      } #>
+        </StackPanel>
+<#   }
+} #>
+    </WrapPanel>
+</Page>

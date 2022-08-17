@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dependencyObjects
+  xmlns="http://www.scottlogic.co.uk/DependencyObject"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+  <dependencyObject type="SilverlightTemplates.RangeControl"
+             base="UserControl" notifyPropertyChanged="true" >
+    <dependencyProperty type="double" defaultValue="0.0" 
+             summary="The maximum range value"
+             name="Maximum" propertyChangedCallback="true"/>
+    <dependencyProperty type="double" defaultValue="0.0" 
+             summary="The maximum range value"
+             name="Minimum" propertyChangedCallback="true"/>
+  </dependencyObject>
+    
+</dependencyObjects>

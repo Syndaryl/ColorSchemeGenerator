@@ -1,0 +1,8 @@
+<#@ include file="DependencyObjectTemplate.tt" #>
+<#
+	var location = this.Host.ResolvePath(@"RangeControl.xml");
+    GenerateClass("SilverlightTemplates.RangeControl",
+        location);
+#>
+
+Clipboard.SetText([217, 73, 32][177, 217, 32][32, 85, 217]

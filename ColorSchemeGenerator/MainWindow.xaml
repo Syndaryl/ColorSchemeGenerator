@@ -1,0 +1,32 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pixiColor="clr-namespace:ColorPicker;assembly=ColorPicker" 
+        x:Class="ColorScheme.GUI.MainWindow"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:gui="clr-namespace:ColorScheme.GUI"
+        xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="500">
+    <Window.Resources>
+        <gui:ColorSchemeConverter x:Key="ColorSchemeConverter"/>
+        <gui:BrushColorConverter x:Key="BrushConverter"></gui:BrushColorConverter>
+
+    </Window.Resources>
+    <d:Window.DataContext>
+        <gui:DataModel>
+        </gui:DataModel>
+    </d:Window.DataContext>
+    <ScrollViewer>
+        <StackPanel x:Name="Panel" Background="{Binding Brush04}">
+            <WrapPanel x:Name="Pixi1">
+                <pixiColor:StandardColorPicker Width="256" Height="256" PickerType="HSL"
+                                        ColorState="{Binding Primary, Converter={StaticResource ColorSchemeConverter}, Mode=TwoWay}" 
+                                        ColorChanged="PickerControlBase_OnColorChanged"></pixiColor:StandardColorPicker>
+            </WrapPanel>
+            <Frame Source="MainWindow.ColorSwatches.xaml"></Frame>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

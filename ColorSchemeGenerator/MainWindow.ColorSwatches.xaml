@@ -1,0 +1,199 @@
+﻿<Page x:Class="ColorScheme.GUI.ColorSwatches"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ColorScheme.GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="128" d:DesignWidth="256"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    Loaded="OnLoad"
+      Title="Color Swatches">
+    <d:Page.DataContext>
+        <local:DataModel>
+        </local:DataModel>
+    </d:Page.DataContext>
+    <Page.Resources>
+        <RectangleGeometry x:Key="Lozenge" RadiusX="8" RadiusY="8" Rect="0,0, 64, 16"/>
+        <Style x:Key="ColorSwatch" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2 0" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <EventSetter Event="Click" Handler="Swatch_OnClick" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2 0" />
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+    <WrapPanel x:Name="Colors">
+        <WrapPanel.Resources>
+        </WrapPanel.Resources>
+        <StackPanel Name="Monochrome">
+            <TextBlock Style="{StaticResource Label}">Monochrome</TextBlock>
+            <Button Name="ButtonMonochrome01"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush01}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonMonochrome02"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush02}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonMonochrome03"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush03}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonMonochrome04"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush04}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonMonochrome05"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush05}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonMonochrome06"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush06}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonMonochrome07"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush07}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+        </StackPanel>
+        <StackPanel Name="Complementary">
+            <TextBlock Style="{StaticResource Label}">Complementary</TextBlock>
+            <Button Name="ButtonComplementary08"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush08}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonComplementary09"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush09}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonComplementary10"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush10}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonComplementary11"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush11}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonComplementary12"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush12}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonComplementary13"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush13}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonComplementary14"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush14}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+        </StackPanel>
+        <StackPanel Name="Analogous">
+            <TextBlock Style="{StaticResource Label}">Analogous</TextBlock>
+            <Button Name="ButtonAnalogous15"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush15}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonAnalogous16"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush16}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonAnalogous17"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush17}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonAnalogous18"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush18}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonAnalogous19"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush19}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonAnalogous20"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush20}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+        </StackPanel>
+        <StackPanel Name="Triadic">
+            <TextBlock Style="{StaticResource Label}">Triadic</TextBlock>
+            <Button Name="ButtonTriadic21"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush21}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonTriadic22"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush22}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonTriadic23"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush23}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonTriadic24"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush24}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonTriadic25"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush25}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonTriadic26"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush26}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+        </StackPanel>
+        <StackPanel Name="Compound">
+            <TextBlock Style="{StaticResource Label}">Compound</TextBlock>
+            <Button Name="ButtonCompound27"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush27}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonCompound28"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush28}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonCompound29"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush29}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonCompound30"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush30}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonCompound31"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush31}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonCompound32"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush32}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+        </StackPanel>
+        <StackPanel Name="Square">
+            <TextBlock Style="{StaticResource Label}">Square</TextBlock>
+            <Button Name="ButtonSquare33"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush33}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonSquare34"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush34}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonSquare35"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush35}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+            <Button Name="ButtonSquare36"  Style="{StaticResource ColorSwatch}">
+                <Path Fill = "{Binding Brush36}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
+            diag:PresentationTraceSources.TraceLevel=High-->
+            </Button >
+        </StackPanel>
+    </WrapPanel>
+</Page>

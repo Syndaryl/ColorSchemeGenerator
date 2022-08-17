@@ -1,0 +1,263 @@
+<#@ output extension=".cs" #>
+    <#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Xml.dll" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.ComponentModel;<#+
+
+
+/// <summary>
+/// Generates all the classes defined within the given XML file
+/// </summary>
+private void GenerateClasses(string xmlFileLocation)
+{
+    XNamespace ns = "http://www.scottlogic.co.uk/DependencyObject";
+    XDocument xmlFile = XDocument.Load(xmlFileLocation);
+    
+    var depObjs = from c in xmlFile.Descendants(ns + "dependencyObject")
+                    select c;
+                    
+    foreach(var depObj in depObjs)
+    {
+        GenerateClass(depObj.Attribute("type").Value, xmlFileLocation);
+    }
+}
+
+/// <summary>
+/// Generates an implementation of INotifyPropertChanged
+/// </summary>
+private void GenerateINotifyPropertChangedImpl()
+{
+    #>    
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+    <#+
+}
+
+/// <summary>
+/// Generates a handler for the DP change event
+/// </summary>
+private void GenerateChangeEventHandler(string className, string propertyName,
+             bool propertyChangedCallback, bool classRaisesPropertyChanged)
+{
+    string raisePropertyChanged = classRaisesPropertyChanged ?
+        string.Format("myClass.OnPropertyChanged(\"{0}\");", propertyName) : "";
+    #>
+    
+        private static void On<#= propertyName #>PropertyChanged(DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            <#= className #> myClass = d as <#= className #>;
+            <#= raisePropertyChanged #>
+            myClass.On<#= propertyName #>PropertyChanged(e);
+        }
+    
+        partial void On<#= propertyName #>PropertyChanged(
+                                 DependencyPropertyChangedEventArgs e);
+        
+    <#+ 
+}
+
+/// <summary>
+/// Generates a DP definition
+/// </summary>
+private void GenerateDependencyProperty(string className, string propertyType, 
+             string defaultValue, string propertyName, bool changedCallback, 
+             bool isAttached, string metadata, string summary)
+{
+    string propertyMetadata;
+    string changedCallbackMethodName = changedCallback ? "On" + 
+           propertyName + "PropertyChanged" : "null";
+    
+    // if DP metadata is provided, create an instance of FrameworkPropertyMetadata, 
+    // this is WPF specific
+    if (!string.IsNullOrEmpty(metadata))
+    {
+        propertyMetadata = string.Format(
+            "new FrameworkPropertyMetadata({0}, {1}, {2})",
+            defaultValue, metadata, changedCallbackMethodName);
+    }
+    else 
+    {
+        propertyMetadata = string.Format("new PropertyMetadata({0}, {1})",
+            defaultValue, changedCallbackMethodName);
+    }
+       
+    string registerMethod = isAttached ? "RegisterAttached" : "Register";
+        
+    #>
+
+        /// <summary>
+        /// Identifies the <#= propertyName #> Dependency Property.
+        /// <summary>
+        public static readonly DependencyProperty <#= propertyName #>Property =
+            DependencyProperty.<#= registerMethod #>("<#= propertyName #>", 
+            typeof(<#= propertyType #>),
+            typeof(<#= className #>), <#= propertyMetadata #>);
+    
+    <#+
+}
+
+/// <summary>
+/// Generates a CLR accessor for a DP
+/// </summary>
+private void GenerateCLRAccessor(string typeConverter, string propertyType, 
+                                 string propertyName, string summary)
+{
+    string typeConverterDefinition = typeConverter!= null ?
+                        "[TypeConverter(typeof(" + typeConverter + "))]" : "";
+                        
+    if (!string.IsNullOrEmpty(summary))
+        GeneratePropertyComment(summary);
+        
+    #>    
+        <#= typeConverterDefinition #>    
+        public <#= propertyType #> <#= propertyName #>
+        {
+            get { return (<#= propertyType #>)GetValue(<#= propertyName #>Property); }
+            set { SetValue(<#= propertyName #>Property, value); }
+        }
+    <#+
+}
+
+private void GenerateAttachedPropertyAccessor(string propertyName, string propertyType)
+{
+    #>
+    
+        // <#= propertyName #> attached property accessors
+        public static void Set<#= propertyName #>(UIElement element, 
+                                                  <#= propertyType #> value)
+        {
+            element.SetValue(PlottedPropertyProperty, value);
+        }
+        public static <#= propertyType #> Get<#= propertyName #>(UIElement element)
+        {
+            return (<#= propertyType #>)element.GetValue(<#= propertyName #>Property);
+        }
+    <#+
+}
+
+/// <summary>
+/// Generates a comment block for a CLR or DP
+/// </summary>
+private void GeneratePropertyComment(string summary)
+{
+    #>    
+        /// <summary>
+        /// <#= summary #>. This is a Dependency Property.
+        /// </summary><#+
+}
+
+/// <summary>
+/// Generates a class along with its associated DPs
+/// </summary>
+private void GenerateClass(string classFullName, string xmlFileLocation)
+{
+    string classNamespace = classFullName.Substring(0, classFullName.LastIndexOf('.'));
+    string className = classFullName.Substring(classFullName.LastIndexOf('.') + 1);
+
+    XNamespace ns = "http://www.scottlogic.co.uk/DependencyObject";
+    XDocument xmlFile = XDocument.Load(xmlFileLocation);
+
+    var dps =    from dp in xmlFile.Descendants(ns + "dependencyProperty")
+                where dp.Parent.Attribute("type").Value == classFullName
+                select dp;
+
+    var depObj = (from c in xmlFile.Descendants(ns + "dependencyObject")
+                    where c.Attribute("type").Value == classFullName
+                    select c).Single();        
+
+    bool classRaisesPropertyChanged = 
+             depObj.Attribute("notifyPropertyChanged")!=null &&
+            (depObj.Attribute("notifyPropertyChanged").Value == 
+             "1" || depObj.Attribute("notifyPropertyChanged").Value == "true");
+
+    string baseType = depObj.Attribute("base").Value;
+#>
+
+namespace <#= classNamespace #>
+{
+    public partial class <#= className #> : 
+      <#= baseType #><#+ if(classRaisesPropertyChanged){ #>, 
+                            INotifyPropertyChanged<#+ } #> 
+    {
+<#+
+    foreach(var dp in dps)
+    {
+        string propertyName = dp.Attribute("name").Value;
+        string propertyType = dp.Attribute("type").Value;
+        string summary = dp.Attribute("summary")!=null ? 
+                         dp.Attribute("summary").Value : null;
+        string metadata = dp.Attribute("metadata")!=null ? 
+                          dp.Attribute("metadata").Value : null;
+        string defaultValue = dp.Attribute("defaultValue").Value;
+        string typeConverter = dp.Attribute("typeConverter")!=null ? 
+                               dp.Attribute("typeConverter").Value : null;
+        bool propertyChangedCallback = 
+             dp.Attribute("propertyChangedCallback")!=null &&
+            (dp.Attribute("propertyChangedCallback").Value == 
+             "1" || dp.Attribute("propertyChangedCallback").Value == "true");
+        bool isAttached = dp.Attribute("attached")!=null &&
+            (dp.Attribute("attached").Value == "1" || 
+             dp.Attribute("attached").Value == "true");
+        #>
+
+        #region <#= propertyName #>
+        <#+        
+        
+        GenerateCLRAccessor(typeConverter, propertyType, propertyName, summary);
+        
+        bool handleDPPropertyChanged = 
+             propertyChangedCallback || classRaisesPropertyChanged;
+        
+        GenerateDependencyProperty(className, propertyType, defaultValue, 
+                                   propertyName, handleDPPropertyChanged, 
+                                   isAttached, metadata, summary);        
+        
+        if (handleDPPropertyChanged)
+        {
+            GenerateChangeEventHandler(className, propertyName, 
+                   propertyChangedCallback, classRaisesPropertyChanged);
+        } 
+        
+        if (isAttached)
+        {
+            GenerateAttachedPropertyAccessor(propertyName, propertyType);
+        }
+        #>        
+        #endregion
+    <#+
+    } // end foreach dps
+
+    if (classRaisesPropertyChanged)
+    {
+        GenerateINotifyPropertChangedImpl();
+    }
+    #> 
+    }
+}
+
+<#+
+}
+#>
