@@ -1,10 +1,57 @@
-﻿using ColorPicker.Models;
+﻿using ColorHelper;
+using ColorPicker.Models;
 using Color = System.Windows.Media.Color;
 
 namespace ColorScheme.GUI;
 
 public static class Extensions
 {
+    
+    public static HSV AdjustHsv( this HSV hsv, int h, int s, int v)
+    {
+        var tempH = hsv.H + h;
+        var tempS = hsv.S + s;
+        var tempL = hsv.V + v;
+        
+        while (tempH < 0) tempH += 360;
+        while (tempH > 360) tempH -= 360;
+        hsv.H = tempH;
+
+        if (tempS < 1) tempS = 0;
+        if (tempL < 0) tempL = 0;
+        if (tempS > 100) tempS = 100;
+        if (tempL > 100) tempL = 100;
+
+        hsv.H = tempH;
+        hsv.S = (byte)tempS;
+        hsv.V = (byte)tempL;
+
+        return hsv;
+    }
+    public static HSL AdjustHsl( this HSL hsl, int hueAdjust, int saturationAdjust, int luminanceSteps, double tintIncrement, double shadeIncrement)
+    {
+        var tempH = hsl.H + hueAdjust;
+        var tempS = hsl.S + saturationAdjust;
+        var luminanceAdjust = luminanceSteps * (luminanceSteps > 0? tintIncrement:shadeIncrement);
+        var tempL = hsl.L + luminanceAdjust;
+
+
+        
+        while (tempH < 0) tempH += 360;
+        while (tempH > 360) tempH -= 360;
+        hsl.H = tempH;
+
+        if (tempS < 1) tempS = 0;
+        if (tempL < 0) tempL = 0;
+        if (tempS > 100) tempS = 100;
+        if (tempL > 100) tempL = 100;
+
+        hsl.H = tempH;
+        hsl.S = (byte)tempS;
+        hsl.L = (byte)tempL;
+
+        return hsl;
+    }
 
     public static Color FromKnownColor(this Color color, System.Drawing.KnownColor knownColor)
     {

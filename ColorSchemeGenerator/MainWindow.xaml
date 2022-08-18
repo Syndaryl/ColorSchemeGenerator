@@ -9,24 +9,30 @@
         xmlns:gui="clr-namespace:ColorScheme.GUI"
         xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="500">
+        Title="MainWindow" Height="550" Width="600">
     <Window.Resources>
         <gui:ColorSchemeConverter x:Key="ColorSchemeConverter"/>
         <gui:BrushColorConverter x:Key="BrushConverter"></gui:BrushColorConverter>
-
+        <SolidColorBrush x:Key="ColorBrush01">
+            <SolidColorBrush.Color>
+                <!--<Binding Path="Color01" />-->
+                <Color R="192" G="255" B="210" A="255"></Color>
+            </SolidColorBrush.Color>
+        </SolidColorBrush>
+        
     </Window.Resources>
     <d:Window.DataContext>
         <gui:DataModel>
         </gui:DataModel>
     </d:Window.DataContext>
     <ScrollViewer>
-        <StackPanel x:Name="Panel" Background="{Binding Brush04}">
-            <WrapPanel x:Name="Pixi1">
-                <pixiColor:StandardColorPicker Width="256" Height="256" PickerType="HSL"
-                                        ColorState="{Binding Primary, Converter={StaticResource ColorSchemeConverter}, Mode=TwoWay}" 
-                                        ColorChanged="PickerControlBase_OnColorChanged"></pixiColor:StandardColorPicker>
-            </WrapPanel>
-            <Frame Source="MainWindow.ColorSwatches.xaml"></Frame>
+        <StackPanel x:Name="Panel">
+            <Grid x:Name="Pixi1">
+                <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
+                <Grid.RowDefinitions></Grid.RowDefinitions>
+                <pixiColor:SquarePicker ColorState="{Binding Primary, Converter={StaticResource ColorSchemeConverter}, Mode=TwoWay}" Width="256" Height="256" ColorChanged="PickerControlBase_OnColorChanged"></pixiColor:SquarePicker>
+            </Grid>
+            <Frame x:Name="Colors" Source="MainWindow.ColorSwatches.xaml" />
         </StackPanel>
     </ScrollViewer>
 </Window>

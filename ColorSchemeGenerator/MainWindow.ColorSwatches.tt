@@ -60,11 +60,10 @@ using (var stream = System.IO.File.OpenRead(location))
 #>
         <StackPanel Name="<#= name #>">
             <TextBlock Style="{StaticResource Label}"><#= name #></TextBlock>
-<#
-        foreach (var subnode in subnodes)
+<#        foreach (var subnode in subnodes)
         {
             x++;
-    #>
+#>
             <Button Name="Button<#= name #><#= x.ToString("00") #>"  Style="{StaticResource ColorSwatch}">
                 <Path Fill = "{Binding Brush<#= x.ToString("00") #>}" Data="{StaticResource Lozenge}" Stroke="Black"></Path><!-- , 
             diag:PresentationTraceSources.TraceLevel=High-->
