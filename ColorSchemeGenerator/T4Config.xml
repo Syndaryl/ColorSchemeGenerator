@@ -1,51 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<config shade="4">
+<config tintDivisions="4">
 	<datamodel name="Monochrome">
-		<color>Shade3</color>
-		<color>Shade2</color>
-		<color>Shade1</color>
-		<color>Primary</color>
-		<color>Tint1</color>
-		<color>Tint2</color>
-		<color>Tint3</color>
+		<color tintLevel="-3">Primary</color>
+		<color tintLevel="-2">Primary</color>
+		<color tintLevel="-1">Primary</color>
+		<color tintLevel="0" >Primary</color>
+		<color tintLevel="1" >Primary</color>
+		<color tintLevel="2" >Primary</color>
+		<color tintLevel="3" >Primary</color>
+	</datamodel>
+	<datamodel name="Gray">
+		<color tintLevel="-3">Gray</color>
+		<color tintLevel="-2">Gray</color>
+		<color tintLevel="-1">Gray</color>
+		<color tintLevel="0" >Gray</color>
+		<color tintLevel="1" >Gray</color>
+		<color tintLevel="2" >Gray</color>
+		<color tintLevel="3" >Gray</color>
 	</datamodel>
 	<datamodel name="Complementary">
-		<color>Complementary1</color>
-		<color>Complementary2</color>
-		<color>Complementary3</color>
-		<color>Complementary4</color>
-		<color>Complementary5</color>
-		<color>Complementary6</color>
-		<color>Complementary7</color>
+		<color tintLevel="-3">Complementary</color>
+		<color tintLevel="-2">Complementary</color>
+		<color tintLevel="-1">Complementary</color>
+		<color tintLevel="0" >Complementary</color>
+		<color tintLevel="1" >Complementary</color>
+		<color tintLevel="2" >Complementary</color>
+		<color tintLevel="3" >Complementary</color>
 	</datamodel>
 	<datamodel name="Analogous">
-		<color degree="15">Analogous1</color>
-		<color degree="15">Analogous2</color>
-		<color degree="15">Analogous3</color>
-		<color degree="15">Analogous4</color>
-		<color degree="15">Analogous5</color>
-		<color degree="15">Analogous6</color>
+		<color tintLevel="-2" degree="30">Analogous1</color>
+		<color tintLevel="0"  degree="30">Analogous1</color>
+		<color tintLevel="2"  degree="30">Analogous1</color>
+		<color tintLevel="-2" degree="30">Analogous2</color>
+		<color tintLevel="0"  degree="30">Analogous2</color>
+		<color tintLevel="2"  degree="30">Analogous2</color>
 	</datamodel>
 	<datamodel name="Triadic">
-		<color degree="60">Triadic1</color>
-		<color degree="60">Triadic2</color>
-		<color degree="60">Triadic3</color>
-		<color degree="60">Triadic4</color>
-		<color degree="60">Triadic5</color>
-		<color degree="60">Triadic6</color>
+		<color tintLevel="-2" degree="60">Triadic1</color>
+		<color tintLevel="0"  degree="60">Triadic1</color>
+		<color tintLevel="2"  degree="60">Triadic1</color>
+		<color tintLevel="-2" degree="60">Triadic2</color>
+		<color tintLevel="0"  degree="60">Triadic2</color>
+		<color tintLevel="2"  degree="60">Triadic2</color>
 	</datamodel>
 	<datamodel name="Compound">
-		<color degree="30">Compound1</color>
-		<color degree="30">Compound2</color>
-		<color degree="30">Compound3</color>
-		<color degree="30">Compound4</color>
-		<color degree="30">Compound5</color>
-		<color degree="30">Compound6</color>
+		<color tintLevel="-2"  degree="45">Compound1</color>
+		<color tintLevel="0"   degree="45">Compound1</color>
+		<color tintLevel="2"   degree="45">Compound1</color>
+		<color tintLevel="-2"  degree="45">Compound2</color>
+		<color tintLevel="0"   degree="45">Compound2</color>
+		<color tintLevel="2"   degree="45">Compound2</color>
 	</datamodel>
 	<datamodel name="Square">
-		<color>Primary</color>
-		<color degree="45">Square1</color>
-		<color degree="45">Square2</color>
-		<color degree="45">Square3</color>
+		<color tintLevel="-2"   degree="90">Square1</color>
+		<color tintLevel="0"    degree="90">Square1</color>
+		<color tintLevel="2"    degree="90">Square1</color>
+		<color tintLevel="-2"   degree="180">Square2</color>
+		<color tintLevel="0"    degree="180">Square2</color>
+		<color tintLevel="2"    degree="180">Square2</color>
+		<color tintLevel="-2"   degree="90">Square3</color>
+		<color tintLevel="0"    degree="90">Square3</color>
+		<color tintLevel="2"    degree="90">Square3</color>
 	</datamodel>
 </config>

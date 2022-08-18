@@ -25,7 +25,7 @@ public partial class DataModel
 <#
 if (configurationData.DocumentElement != null)
 {
-    var shadeNode = configurationData.DocumentElement.SelectSingleNode("/config/@shade");
+    var shadeNode = configurationData.DocumentElement.SelectSingleNode("/config/@tintDivisions");
     var nodes = configurationData.DocumentElement.SelectNodes("/config/datamodel/color");
 
     int colorCount = nodes.Count;
@@ -52,9 +52,10 @@ if (configurationData.DocumentElement != null)
 <# 
         for (var x = 0; x < colorCount; x++)
         {
-            var degree = nodes[x].SelectNodes("@degree")[0]?.Value ?? "15";
+            var degree = nodes[x].SelectSingleNode("@degree")?.Value ?? "15";
+            var tintLevel = nodes[x].SelectSingleNode("@tintLevel")?.Value ?? "2";
 #>
-            Color<#= (x+1).ToString("00") #> = _scheme.Harmonize(ColorHarmony.<#= nodes[x].InnerText #>, <#= degree #>, <#= shadeNode.Value #>);
+            Color<#= (x+1).ToString("00") #> = _scheme.Harmonize(ColorHarmony.<#= nodes[x].InnerText #>, <#= degree #>,  <#= tintLevel #>, <#= shadeNode.Value #>);
 <# } #>
     }
 <#}#>

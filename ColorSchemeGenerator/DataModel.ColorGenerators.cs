@@ -227,6 +227,72 @@ public partial class DataModel
         set => Brush37.Color = value;
     }
     
+    public Color Color38
+    {
+        get => Brush38.Color;
+        set => Brush38.Color = value;
+    }
+    
+    public Color Color39
+    {
+        get => Brush39.Color;
+        set => Brush39.Color = value;
+    }
+    
+    public Color Color40
+    {
+        get => Brush40.Color;
+        set => Brush40.Color = value;
+    }
+    
+    public Color Color41
+    {
+        get => Brush41.Color;
+        set => Brush41.Color = value;
+    }
+    
+    public Color Color42
+    {
+        get => Brush42.Color;
+        set => Brush42.Color = value;
+    }
+    
+    public Color Color43
+    {
+        get => Brush43.Color;
+        set => Brush43.Color = value;
+    }
+    
+    public Color Color44
+    {
+        get => Brush44.Color;
+        set => Brush44.Color = value;
+    }
+    
+    public Color Color45
+    {
+        get => Brush45.Color;
+        set => Brush45.Color = value;
+    }
+    
+    public Color Color46
+    {
+        get => Brush46.Color;
+        set => Brush46.Color = value;
+    }
+    
+    public Color Color47
+    {
+        get => Brush47.Color;
+        set => Brush47.Color = value;
+    }
+    
+    public Color Color48
+    {
+        get => Brush48.Color;
+        set => Brush48.Color = value;
+    }
+    
     public SolidColorBrush Brush01 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
     public SolidColorBrush Brush02 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
     public SolidColorBrush Brush03 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
@@ -264,6 +330,17 @@ public partial class DataModel
     public SolidColorBrush Brush35 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
     public SolidColorBrush Brush36 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
     public SolidColorBrush Brush37 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush38 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush39 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush40 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush41 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush42 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush43 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush44 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush45 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush46 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush47 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
+    public SolidColorBrush Brush48 { get; } = new(new Color().FromKnownColor(KnownColor.CornflowerBlue));
 
     public void Update()
     {
@@ -271,42 +348,53 @@ public partial class DataModel
         _scheme.PrimaryColor.G = _primary.G;
         _scheme.PrimaryColor.B = _primary.B;
 
-            Color01 = _scheme.Harmonize(ColorHarmony.Shade3, 15, 4);
-            Color02 = _scheme.Harmonize(ColorHarmony.Shade2, 15, 4);
-            Color03 = _scheme.Harmonize(ColorHarmony.Shade1, 15, 4);
-            Color04 = _scheme.Harmonize(ColorHarmony.Primary, 15, 4);
-            Color05 = _scheme.Harmonize(ColorHarmony.Tint1, 15, 4);
-            Color06 = _scheme.Harmonize(ColorHarmony.Tint2, 15, 4);
-            Color07 = _scheme.Harmonize(ColorHarmony.Tint3, 15, 4);
-            Color08 = _scheme.Harmonize(ColorHarmony.Complementary1, 15, 4);
-            Color09 = _scheme.Harmonize(ColorHarmony.Complementary2, 15, 4);
-            Color10 = _scheme.Harmonize(ColorHarmony.Complementary3, 15, 4);
-            Color11 = _scheme.Harmonize(ColorHarmony.Complementary4, 15, 4);
-            Color12 = _scheme.Harmonize(ColorHarmony.Complementary5, 15, 4);
-            Color13 = _scheme.Harmonize(ColorHarmony.Complementary6, 15, 4);
-            Color14 = _scheme.Harmonize(ColorHarmony.Complementary7, 15, 4);
-            Color15 = _scheme.Harmonize(ColorHarmony.Analogous1, 15, 4);
-            Color16 = _scheme.Harmonize(ColorHarmony.Analogous2, 15, 4);
-            Color17 = _scheme.Harmonize(ColorHarmony.Analogous3, 15, 4);
-            Color18 = _scheme.Harmonize(ColorHarmony.Primary, 15, 4);
-            Color19 = _scheme.Harmonize(ColorHarmony.Analogous4, 15, 4);
-            Color20 = _scheme.Harmonize(ColorHarmony.Analogous5, 15, 4);
-            Color21 = _scheme.Harmonize(ColorHarmony.Analogous6, 15, 4);
-            Color22 = _scheme.Harmonize(ColorHarmony.Triadic1, 60, 4);
-            Color23 = _scheme.Harmonize(ColorHarmony.Triadic2, 60, 4);
-            Color24 = _scheme.Harmonize(ColorHarmony.Triadic3, 60, 4);
-            Color25 = _scheme.Harmonize(ColorHarmony.Triadic4, 60, 4);
-            Color26 = _scheme.Harmonize(ColorHarmony.Triadic5, 60, 4);
-            Color27 = _scheme.Harmonize(ColorHarmony.Triadic6, 60, 4);
-            Color28 = _scheme.Harmonize(ColorHarmony.Compound1, 30, 4);
-            Color29 = _scheme.Harmonize(ColorHarmony.Compound2, 30, 4);
-            Color30 = _scheme.Harmonize(ColorHarmony.Compound3, 30, 4);
-            Color31 = _scheme.Harmonize(ColorHarmony.Compound4, 30, 4);
-            Color32 = _scheme.Harmonize(ColorHarmony.Compound5, 30, 4);
-            Color33 = _scheme.Harmonize(ColorHarmony.Compound6, 30, 4);
-            Color34 = _scheme.Harmonize(ColorHarmony.Primary, 15, 4);
-            Color35 = _scheme.Harmonize(ColorHarmony.Square1, 45, 4);
-            Color36 = _scheme.Harmonize(ColorHarmony.Square2, 45, 4);
-            Color37 = _scheme.Harmonize(ColorHarmony.Square3, 45, 4);
+            Color01 = _scheme.Harmonize(ColorHarmony.Primary, 15,  -3, 4);
+            Color02 = _scheme.Harmonize(ColorHarmony.Primary, 15,  -2, 4);
+            Color03 = _scheme.Harmonize(ColorHarmony.Primary, 15,  -1, 4);
+            Color04 = _scheme.Harmonize(ColorHarmony.Primary, 15,  0, 4);
+            Color05 = _scheme.Harmonize(ColorHarmony.Primary, 15,  1, 4);
+            Color06 = _scheme.Harmonize(ColorHarmony.Primary, 15,  2, 4);
+            Color07 = _scheme.Harmonize(ColorHarmony.Primary, 15,  3, 4);
+            Color08 = _scheme.Harmonize(ColorHarmony.Gray, 15,  -3, 4);
+            Color09 = _scheme.Harmonize(ColorHarmony.Gray, 15,  -2, 4);
+            Color10 = _scheme.Harmonize(ColorHarmony.Gray, 15,  -1, 4);
+            Color11 = _scheme.Harmonize(ColorHarmony.Gray, 15,  0, 4);
+            Color12 = _scheme.Harmonize(ColorHarmony.Gray, 15,  1, 4);
+            Color13 = _scheme.Harmonize(ColorHarmony.Gray, 15,  2, 4);
+            Color14 = _scheme.Harmonize(ColorHarmony.Gray, 15,  3, 4);
+            Color15 = _scheme.Harmonize(ColorHarmony.Complementary, 15,  -3, 4);
+            Color16 = _scheme.Harmonize(ColorHarmony.Complementary, 15,  -2, 4);
+            Color17 = _scheme.Harmonize(ColorHarmony.Complementary, 15,  -1, 4);
+            Color18 = _scheme.Harmonize(ColorHarmony.Complementary, 15,  0, 4);
+            Color19 = _scheme.Harmonize(ColorHarmony.Complementary, 15,  1, 4);
+            Color20 = _scheme.Harmonize(ColorHarmony.Complementary, 15,  2, 4);
+            Color21 = _scheme.Harmonize(ColorHarmony.Complementary, 15,  3, 4);
+            Color22 = _scheme.Harmonize(ColorHarmony.Analogous1, 30,  -2, 4);
+            Color23 = _scheme.Harmonize(ColorHarmony.Analogous1, 30,  0, 4);
+            Color24 = _scheme.Harmonize(ColorHarmony.Analogous1, 30,  2, 4);
+            Color25 = _scheme.Harmonize(ColorHarmony.Analogous2, 30,  -2, 4);
+            Color26 = _scheme.Harmonize(ColorHarmony.Analogous2, 30,  0, 4);
+            Color27 = _scheme.Harmonize(ColorHarmony.Analogous2, 30,  2, 4);
+            Color28 = _scheme.Harmonize(ColorHarmony.Triadic1, 60,  -2, 4);
+            Color29 = _scheme.Harmonize(ColorHarmony.Triadic1, 60,  0, 4);
+            Color30 = _scheme.Harmonize(ColorHarmony.Triadic1, 60,  2, 4);
+            Color31 = _scheme.Harmonize(ColorHarmony.Triadic2, 60,  -2, 4);
+            Color32 = _scheme.Harmonize(ColorHarmony.Triadic2, 60,  0, 4);
+            Color33 = _scheme.Harmonize(ColorHarmony.Triadic2, 60,  2, 4);
+            Color34 = _scheme.Harmonize(ColorHarmony.Compound1, 45,  -2, 4);
+            Color35 = _scheme.Harmonize(ColorHarmony.Compound1, 45,  0, 4);
+            Color36 = _scheme.Harmonize(ColorHarmony.Compound1, 45,  2, 4);
+            Color37 = _scheme.Harmonize(ColorHarmony.Compound2, 45,  -2, 4);
+            Color38 = _scheme.Harmonize(ColorHarmony.Compound2, 45,  0, 4);
+            Color39 = _scheme.Harmonize(ColorHarmony.Compound2, 45,  2, 4);
+            Color40 = _scheme.Harmonize(ColorHarmony.Square1, 90,  -2, 4);
+            Color41 = _scheme.Harmonize(ColorHarmony.Square1, 90,  0, 4);
+            Color42 = _scheme.Harmonize(ColorHarmony.Square1, 90,  2, 4);
+            Color43 = _scheme.Harmonize(ColorHarmony.Square2, 180,  -2, 4);
+            Color44 = _scheme.Harmonize(ColorHarmony.Square2, 180,  0, 4);
+            Color45 = _scheme.Harmonize(ColorHarmony.Square2, 180,  2, 4);
+            Color46 = _scheme.Harmonize(ColorHarmony.Square3, 90,  -2, 4);
+            Color47 = _scheme.Harmonize(ColorHarmony.Square3, 90,  0, 4);
+            Color48 = _scheme.Harmonize(ColorHarmony.Square3, 90,  2, 4);
     }
 }
